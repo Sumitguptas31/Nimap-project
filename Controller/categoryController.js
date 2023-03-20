@@ -1,4 +1,4 @@
-const db=require("../../models/index")
+const db=require("../models/index")
 
 const addCategories = async (req, res) => {
     const {categoryName,categoryDetails} = req.body;
@@ -9,7 +9,6 @@ const addCategories = async (req, res) => {
         data: created_category
     })
 }
-
 const getAllCategories= async (req, res) => {
     try {
         let products = await db.Category.findAll()
