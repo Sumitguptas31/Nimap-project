@@ -29,7 +29,14 @@ const addProduct= async (req, res) => {
 
 const getAllProduct= async (req, res) => {
     try {
-        let products = await db.Products.findAll()
+        const {page,size} = req.query;
+        let products = await db.Products.findAll({
+            offset: (page - 1) * size,
+            limit: size,
+            include:[{
+                model:db.Category 
+            }],
+        })
         res.status(200).send({success: true, msg: "all product fetched", data: products})
     } catch (error) {
         return res.status(400).json({
